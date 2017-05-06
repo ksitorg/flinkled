@@ -1,0 +1,32 @@
+
+FLINK Befehle:
+Command Line Interface Doku:
+https://ci.apache.org/projects/flink/flink-docs-release-1.3/setup/cli.html
+- Starten
+bin/start-local.bat
+- Stoppen
+bin/stop-local.bat
+- Job List
+bin/flink.bat list
+- Job stoppen
+bin/flink.bat stop JOBID
+bin/flink.bat cancel JOBID
+- Check ob gestartet:
+tail log/flink-*-jobmanager-*.log
+
+Beispiel Programm:
+- Netcat Server starten:
+nc -L -p 9000
+- Flink Beispiel starten:
+bin/flink.bat run examples/streaming/SocketWindowWordCount.jar --port 9000
+- In der OUT gucken, was es gibt
+tail -f log/flink-*-jobmanager-*.out
+
+== Mail Programm ===
+1. MVN Bauen:
+    mvn clean install package -P build-jar
+2. Job auf Flink starten:
+  bin/flink.bat run -c de.haw.eled.ImapLEDJob C:/Users/Tim/IdeaProjects/testproject/target/test-project-1.0-SNAPSHOT.jar
+- In der OUT gucken, was es gibt
+	tail -f log/flink-*-jobmanager-*.out
+
