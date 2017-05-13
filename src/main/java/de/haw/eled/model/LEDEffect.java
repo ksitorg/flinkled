@@ -7,9 +7,19 @@ public class LEDEffect {
     private int r;
     private int g;
     private int b;
+    private int w;
+
+    public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        this.w = w;
+    }
+
     private int time;
 
-    public LEDEffect(int r, int g, int b, int time) {
+    public LEDEffect(int r, int g, int b, int w, int time) {
         this.r = r;
         this.g = g;
         this.b = b;

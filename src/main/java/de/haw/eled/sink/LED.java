@@ -16,20 +16,20 @@ public class LED implements Serializable {
     private static final Logger LOG = LoggerFactory.getLogger(LED.class);
 
     public void blink() throws IOException, InterruptedException {
-        sendBlinkToLED(0,255,0,300);
+        sendBlinkToLED(0,255,0,0,300);
     }
 
     public void triggerEffect(LEDEffect ledEffect)
     {
         try {
-            sendBlinkToLED(ledEffect.getR(),ledEffect.getG(),ledEffect.getB(),ledEffect.getTime());
+            sendBlinkToLED(ledEffect.getR(),ledEffect.getG(),ledEffect.getB(),ledEffect.getW(),ledEffect.getTime());
         } catch (IOException e) {
             LOG.error("Error while triggering LED effect",e);
         }
     }
 
-    private void sendBlinkToLED(int r, int g, int b, int time) throws IOException {
-        URL url = new URL("http://localhost:8080/led/effect/trigger/blink/"+time+"/"+r+","+g+","+b);
+    private void sendBlinkToLED(int r, int g, int b, int w, int time) throws IOException {
+        URL url = new URL("http://localhost:8080/led/trigger/effect/blink/"+time+"/"+r+","+g+","+b+","+w);
 
         //make connection
         URLConnection urlc = url.openConnection();

@@ -35,7 +35,7 @@ public class ImapLEDJob {
 
         //Add Source
         //SourceFunction<MailMessage> mailMessageSourceFunction = new ImapDataSourceFunction("host","user","password");
-        SourceFunction<MailMessage> imapDataSourceFunction = new ImapDataSourceFunction("imap-client.properties");
+        SourceFunction<MailMessage> imapDataSourceFunction = new ImapDataSourceFunction("my-imap-client.properties");
 
         DataStream<LEDEffect> imapDataStream = env.addSource(imapDataSourceFunction, "ImapDataStream")
         .flatMap(new FlatMapFunction<MailMessage, LEDEffect>() {
@@ -43,9 +43,9 @@ public class ImapLEDJob {
             public void flatMap(MailMessage value, Collector<LEDEffect> out) throws Exception {
                 LEDEffect ledEffect;
                 if(value.getSender()[0].toString().contains("tim@ksit.org"))
-                    ledEffect = new LEDEffect(0,0,255,200);
+                    ledEffect = new LEDEffect(0,0,255,0,200);
                 else
-                    ledEffect = new LEDEffect(0,255,0,200);
+                    ledEffect = new LEDEffect(0,255,0,0,200);
                 out.collect(ledEffect);
             }
         });
